@@ -157,8 +157,8 @@ const jsonLd = {
       "name": "Riya Escorts Hyderabad",
       "alternateName": "CalGirl Riya",
       "url": siteUrl,
-      "logo": `${siteUrl}/images/logo.png`,
-      "image": `${siteUrl}/images/firstpage.avif`,
+      "logo": `${siteUrl}/icon.png`,
+      "image": `${siteUrl}/images/homepart.png`,
       "description":
         "Verified VIP Call Girls & Escort Service in Hyderabad with direct WhatsApp and phone booking.",
       "telephone": "+91-8294107610",

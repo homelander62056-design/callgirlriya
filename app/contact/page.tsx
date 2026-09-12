@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import WhatsAppIcon from "../components/WhatsAppIcon";
 
 export const metadata: Metadata = {
@@ -16,12 +17,12 @@ export default function ContactPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-xs font-medium text-zinc-400 mb-6">
-            <a
-              href="https://sexygirlriya.freeescortsite.com/"
+            <Link
+              href="/"
               className="hover:text-white transition-colors"
             >
               Home
-            </a>
+            </Link>
             <span>›</span>
             <span className="text-rose-400 font-semibold">Contact Us</span>
           </div>
