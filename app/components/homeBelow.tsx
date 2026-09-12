@@ -4,29 +4,6 @@ import React from "react";
 import Link from "next/link";
 
 export default function HomeBelow() {
-  const faqs = [
-    {
-      q: "How can I book a call girl in Hyderabad through Riya Escorts?",
-      a: "Booking is instant and 100% confidential. Browse our verified models collection, choose your preferred companion, and click the WhatsApp or Call Now button (+91 82941 07610) to confirm your meeting within 5 minutes.",
-    },
-    {
-      q: "Are the escort photos genuine and 100% verified?",
-      a: "Yes, every profile listed on Riya Escorts Hyderabad has genuine and authentic photos. We can also share real-time photo confirmation on WhatsApp before confirming your appointment.",
-    },
-    {
-      q: "Which areas in Hyderabad do your models visit for out-calls?",
-      a: "Our escorts provide 24/7 doorstep hotel and residence visits across all prime areas in Hyderabad including Banjara Hills, Jubilee Hills, Hitec City, Gachibowli, Madhapur, Kondapur, Begumpet, Somajiguda, Kukatpally, Secunderabad, and Financial District.",
-    },
-    {
-      q: "Is advance payment required before meeting?",
-      a: "No advance payment is needed for genuine bookings. You can pay cash on meeting directly to your companion once you meet and verify.",
-    },
-    {
-      q: "How is my privacy and discretion protected?",
-      a: "We maintain absolute confidentiality. We never save your phone number, name, or call records, ensuring complete peace of mind.",
-    },
-  ];
-
   const features = [
     {
       icon: "💎",
@@ -123,35 +100,6 @@ export default function HomeBelow() {
               Your escort arrives at your hotel or home in 20-30 minutes. Pay cash on arrival.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="space-y-6">
-        <div className="text-center space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
-            QUESTIONS & ANSWERS
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="space-y-4 max-w-4xl mx-auto">
-          {faqs.map((faq) => (
-            <div
-              key={faq.q}
-              className="bg-white border border-zinc-200 rounded-2xl p-5 shadow-xs space-y-2 text-left"
-            >
-              <h4 className="text-sm sm:text-base font-bold text-zinc-900 flex items-start gap-2">
-                <span className="text-blue-600 font-extrabold">Q:</span>
-                <span>{faq.q}</span>
-              </h4>
-              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed pl-5">
-                {faq.a}
-              </p>
-            </div>
-          ))}
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { trackWhatsAppClick } from "../utils/trackWhatsapp";
@@ -86,8 +87,15 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo / Brand Name */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center font-bold text-white shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform">
-              R
+            <div className="relative h-10 w-10 rounded-xl overflow-hidden shadow-lg shadow-rose-600/25 border border-rose-500/30 group-hover:scale-105 transition-transform flex items-center justify-center bg-zinc-900">
+              <Image
+                src="/favicon.ico.png"
+                alt="Riya Escorts Logo"
+                width={40}
+                height={40}
+                className="object-cover w-full h-full rounded-xl"
+                priority
+              />
             </div>
             <div>
               <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-rose-400 via-pink-300 to-amber-300 bg-clip-text text-transparent group-hover:brightness-110 transition-all">

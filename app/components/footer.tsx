@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { trackWhatsAppClick } from "../utils/trackWhatsapp";
 
 export default function Footer() {
@@ -11,8 +12,14 @@ export default function Footer() {
           {/* Brand & Summary */}
           <div className="md:col-span-1 space-y-3">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center font-bold text-white shadow-md">
-                R
+              <div className="relative h-8 w-8 rounded-lg overflow-hidden border border-rose-500/30 shadow-md flex items-center justify-center bg-zinc-900">
+                <Image
+                  src="/favicon.ico.png"
+                  alt="Riya Escorts Logo"
+                  width={32}
+                  height={32}
+                  className="object-cover w-full h-full rounded-lg"
+                />
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
                 Riya Escorts Hyderabad
@@ -61,6 +68,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/faq"
+                  className="hover:text-rose-400 transition-colors"
+                >
+                  FAQ / Questions
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className="hover:text-rose-400 transition-colors"
                 >
@@ -83,16 +98,7 @@ export default function Footer() {
                   Security
                 </Link>
               </li>
-              <li>
-                <a
-                  href="https://sexygirlriya.freeescortsite.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-rose-400 transition-colors"
-                >
-                  Main Website ↗
-                </a>
-              </li>
+
             </ul>
           </div>
 
@@ -138,15 +144,21 @@ export default function Footer() {
           {/* Privacy Policy & Discreet Assistance */}
           <div className="space-y-3">
             <h4 className="text-sm uppercase font-bold tracking-wider text-white">
-              Privacy Policy & Discretion
+              Privacy & Support
             </h4>
             <p className="text-sm text-zinc-400 leading-relaxed">
               We ensure 100% privacy and zero data retention for all our clients across Hyderabad.
             </p>
             <div className="space-y-1.5 pb-1">
               <Link
-                href="/privacy-policy"
+                href="/faq"
                 className="text-rose-400 hover:text-rose-300 transition-colors flex items-center gap-1.5 font-semibold text-sm"
+              >
+                <span>Frequently Asked Questions →</span>
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className="text-zinc-400 hover:text-rose-400 transition-colors flex items-center gap-1.5 text-sm"
               >
                 <span>Privacy Policy →</span>
               </Link>
