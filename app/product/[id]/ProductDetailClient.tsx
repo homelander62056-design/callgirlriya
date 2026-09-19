@@ -6,6 +6,7 @@ import { ProductItem, initialProductsData } from "../productsData";
 import { getModelSpecsAndDetails } from "./data";
 import { trackWhatsAppClick, createWhatsAppLink } from "../../utils/trackWhatsapp";
 import WhatsAppIcon from "../../components/WhatsAppIcon";
+import PhoneIcon from "../../components/PhoneIcon";
 
 interface ProductDetailClientProps {
   product: ProductItem;
@@ -46,8 +47,8 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
         {/* Profile Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Image */}
-          <div className="lg:col-span-5">
-            <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-2xl group">
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-none aspect-[4/5] sm:aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-zinc-900 border border-zinc-800 shadow-2xl group">
               <img
                 src={details.displayImage}
                 alt={`${product.name} - Escort in ${product.city}`}
@@ -59,23 +60,23 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
               {/* Status Badges */}
-              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                <span className="bg-emerald-600/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-md">
-                  <span className="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2">
+                <span className="bg-emerald-600/90 backdrop-blur-md text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-md">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-300 animate-ping"></span>
                   {product.status || "Available Now"}
                 </span>
-                <span className="bg-rose-600/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                <span className="bg-rose-600/90 backdrop-blur-md text-white text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-md">
                   {details.badge}
                 </span>
               </div>
 
               {/* Overlay Bottom Info on Image */}
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-2xl sm:text-3xl font-black">{product.name}</div>
-                <div className="text-xs sm:text-sm text-zinc-300 flex items-center gap-2 mt-1">
-                  <span>📍 {details.locationDetail}</span>
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-white">
+                <div className="text-xl sm:text-3xl font-black">{product.name}</div>
+                <div className="text-xs sm:text-sm text-zinc-300 flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
+                  <span className="truncate">📍 {details.locationDetail}</span>
                   <span>•</span>
-                  <span>🕒 {details.timing}</span>
+                  <span className="shrink-0">🕒 {details.timing}</span>
                 </div>
               </div>
             </div>
@@ -121,7 +122,8 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                   href={`tel:${cleanPhone}`}
                   className="flex-1 bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold py-3.5 px-6 rounded-xl text-center text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-rose-500/20 active:scale-[0.98]"
                 >
-                  <span className="text-xl">📞</span> Call Directly
+                  <PhoneIcon className="w-5 h-5 shrink-0" size={20} />
+                  <span>Call Directly</span>
                 </a>
               </div>
               <div className="flex items-center justify-center sm:justify-start gap-4 text-xs text-zinc-400 pt-1">
@@ -281,7 +283,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
             {relatedProducts.map((item) => {
               const relatedCleanPhone = item.phone.replace(/[^+\d]/g, "");
               const relatedWaLink = createWhatsAppLink(item.name, item.city, item.whatsappNumber);
@@ -289,11 +291,11 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
               return (
                 <div
                   key={item.id}
-                  className="bg-zinc-900/70 border border-zinc-800 rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 transition-all flex flex-col group"
+                  className="bg-zinc-900/70 border border-zinc-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 transition-all flex flex-row sm:flex-col group"
                 >
                   <Link
                     href={`/product/${item.id}`}
-                    className="block relative aspect-[3/4] bg-zinc-950 overflow-hidden cursor-pointer"
+                    className="block relative w-36 sm:w-full shrink-0 aspect-[3/4] bg-zinc-950 overflow-hidden cursor-pointer"
                   >
                     <img
                       src={item.image || "/images/image1.avif"}
@@ -303,22 +305,33 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                         e.currentTarget.src = "/images/image1.avif";
                       }}
                     />
-                    <span className="absolute top-3 left-3 bg-rose-600/90 text-white text-[11px] font-bold px-3 py-0.5 rounded-full flex items-center gap-1.5 backdrop-blur-xs">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
+                    {/* Status Badge on Desktop Image */}
+                    <span className="hidden sm:flex absolute top-3 left-3 bg-rose-600/90 text-white text-[11px] font-bold px-3 py-0.5 rounded-full items-center gap-1.5 backdrop-blur-xs">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      {item.status || "Available"}
+                      <span className="truncate">{item.status || "Available"}</span>
                     </span>
                   </Link>
 
-                  <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
-                    <div>
+                  <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2.5 sm:space-y-3 min-w-0">
+                    <div className="space-y-1">
                       <Link href={`/product/${item.id}`}>
-                        <h3 className="text-lg font-extrabold text-white group-hover:text-rose-400 transition-colors cursor-pointer">
+                        <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-rose-400 transition-colors cursor-pointer truncate">
                           {item.name}
                         </h3>
                       </Link>
-                      <p className="text-xs text-zinc-400 font-semibold mt-0.5">
-                        {item.age} years &bull; <span className="text-emerald-400">Verified</span>
+                      <p className="text-xs text-rose-400 font-medium truncate flex items-center gap-1">
+                        <span>📍</span> {item.area || item.city}
                       </p>
+                      <p className="text-xs text-zinc-400 font-semibold">
+                        {item.age} years &bull; <span className="text-emerald-400 font-bold">Verified</span>
+                      </p>
+
+                      {/* Status Below Age on Mobile */}
+                      <div className="sm:hidden flex items-center gap-1.5 pt-0.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span className="text-[11px] font-semibold text-emerald-400">{item.status || "Available Now"}</span>
+                      </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-2 pt-1">
@@ -326,6 +339,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                         href={relatedWaLink}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="WhatsApp"
                         onClick={() =>
                           trackWhatsAppClick({
                             name: item.name,
@@ -333,16 +347,18 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                             whatsappNumber: item.whatsappNumber,
                           })
                         }
-                        className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
+                        className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
                       >
-                        <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" size={16} />
-                        <span>WhatsApp</span>
+                        <WhatsAppIcon className="w-4 h-4 shrink-0" size={16} />
+                        <span className="hidden sm:inline">WhatsApp</span>
                       </a>
                       <a
                         href={`tel:${relatedCleanPhone}`}
-                        className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1 transition-all"
+                        aria-label="Call Now"
+                        className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
                       >
-                        Call Now
+                        <PhoneIcon className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" size={16} />
+                        <span className="hidden sm:inline">Call Now</span>
                       </a>
                     </div>
                   </div>

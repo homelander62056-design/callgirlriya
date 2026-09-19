@@ -5,6 +5,7 @@ import Link from "next/link";
 import { initialProductsData } from "./productsData";
 import { trackWhatsAppClick, createWhatsAppLink } from "../utils/trackWhatsapp";
 import WhatsAppIcon from "../components/WhatsAppIcon";
+import PhoneIcon from "../components/PhoneIcon";
 
 export default function ProductClient() {
   return (
@@ -29,10 +30,8 @@ export default function ProductClient() {
           <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto">
             Browse our exclusive collection of verified VIP escorts and companions available 24/7 for in-call & out-call services.
           </p>
-        </div>
-
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        </div>        {/* Product Grid - Mobile: Horizontal list card (Left image, Right text & buttons) | Desktop: 4 Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
           {initialProductsData.map((item) => {
             const cleanPhone = item.phone.replace(/[^+\d]/g, "");
             const waLink = createWhatsAppLink(item.name, item.city, item.whatsappNumber);
@@ -40,9 +39,13 @@ export default function ProductClient() {
             return (
               <div
                 key={item.id}
-                className="bg-zinc-900/70 border border-zinc-800 rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 hover:shadow-2xl transition-all flex flex-col group"
+                className="bg-zinc-900/70 border border-zinc-800 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 hover:shadow-2xl transition-all flex flex-row sm:flex-col group"
               >
-                <Link href={`/product/${item.id}`} className="block relative aspect-[3/4] bg-zinc-950 overflow-hidden cursor-pointer">
+                {/* Left Side Image on Mobile, Top Image on Desktop */}
+                <Link
+                  href={`/product/${item.id}`}
+                  className="block relative w-38 sm:w-full shrink-0 aspect-[3/4] bg-zinc-950 overflow-hidden cursor-pointer"
+                >
                   <img
                     src={item.image || `/images/image1.avif`}
                     alt={`${item.name} – Escort & Call Girl in ${item.city}`}
@@ -52,22 +55,33 @@ export default function ProductClient() {
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
-                  <span className="absolute top-3 left-3 bg-rose-600/90 text-white text-[11px] font-bold px-3 py-0.5 rounded-full flex items-center gap-1.5 backdrop-blur-xs shadow-md">
+                  {/* Status Badge on Desktop Image */}
+                  <span className="hidden sm:flex absolute top-3 left-3 bg-rose-600/90 text-white text-[11px] font-bold px-3 py-0.5 rounded-full items-center gap-1.5 backdrop-blur-xs shadow-md">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    {item.status || "Available Now"}
+                    <span className="truncate">{item.status || "Available"}</span>
                   </span>
                 </Link>
 
-                <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
-                  <div>
+                {/* Right Side Text & WhatsApp/Call Buttons on Mobile, Bottom on Desktop */}
+                <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2.5 sm:space-y-3 min-w-0">
+                  <div className="space-y-1">
                     <Link href={`/product/${item.id}`}>
-                      <h3 className="text-lg font-extrabold text-white group-hover:text-rose-400 transition-colors cursor-pointer">
+                      <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-rose-400 transition-colors cursor-pointer truncate">
                         {item.name}
                       </h3>
                     </Link>
-                    <p className="text-xs text-zinc-400 font-semibold mt-0.5">
-                      {item.age} years &bull; <span className="text-emerald-400">Verified</span>
+                    <p className="text-xs text-rose-400 font-medium truncate flex items-center gap-1">
+                      <span>📍</span> {item.area || item.city}
                     </p>
+                    <p className="text-xs text-zinc-400 font-semibold">
+                      {item.age} years &bull; <span className="text-emerald-400 font-bold">Verified</span>
+                    </p>
+
+                    {/* Status Below Age on Mobile */}
+                    <div className="sm:hidden flex items-center gap-1.5 pt-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span className="text-[11px] font-semibold text-emerald-400">{item.status || "Available Now"}</span>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 pt-1">
@@ -75,6 +89,7 @@ export default function ProductClient() {
                       href={waLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="WhatsApp"
                       onClick={() =>
                         trackWhatsAppClick({
                           name: item.name,
@@ -82,16 +97,18 @@ export default function ProductClient() {
                           whatsappNumber: item.whatsappNumber,
                         })
                       }
-                      className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
+                      className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
                     >
-                      <WhatsAppIcon className="w-4 h-4 shrink-0" />
-                      <span>WhatsApp</span>
+                      <WhatsAppIcon className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" size={18} />
+                      <span className="hidden sm:inline">WhatsApp</span>
                     </a>
                     <a
                       href={`tel:${cleanPhone}`}
-                      className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-xl text-xs flex items-center justify-center gap-1 transition-all shadow-md active:scale-95"
+                      aria-label="Call Now"
+                      className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
                     >
-                      <span>📞</span> Call Now
+                      <PhoneIcon className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" size={18} />
+                      <span className="hidden sm:inline">Call Now</span>
                     </a>
                   </div>
                 </div>
@@ -99,7 +116,6 @@ export default function ProductClient() {
             );
           })}
         </div>
-
       </main>
     </div>
   );

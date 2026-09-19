@@ -24,27 +24,39 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = product.metaTitle || `${product.name} – ${product.city} Escort | VIP Call Girl Hyderabad`;
+  const areaName = product.area || product.city.replace("Hyderabad / ", "");
+  const title =
+    product.metaTitle || `${product.name} – Call Girl in ${areaName} Hyderabad | VIP Escorts`;
   const description =
     product.metaDescription ||
-    `Book ${product.name}, a verified ${product.age}-year-old VIP escort in ${product.city}, Hyderabad. Available 24/7 for hotel & home outcalls. 100% genuine photos & privacy.`;
+    `Book ${product.name}, a verified ${product.age}-year-old VIP escort in ${areaName}, Hyderabad (PIN: ${product.postalCode || "500034"}). Available 24/7 for 5-star hotel & home outcalls with 100% genuine photos & privacy.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.calgirlriya.in";
   const canonicalUrl = `${siteUrl}/product/${product.id}`;
+  const lat = product.latitude || 17.385;
+  const lng = product.longitude || 78.4867;
+  const geoPos = product.geoPosition || `${lat};${lng}`;
+  const icbm = `${lat}, ${lng}`;
+  const placename = product.geoPlacename || `${areaName}, Hyderabad, Telangana, India`;
 
   return {
     title,
     description,
     keywords: [
       product.name,
-      `${product.city} call girls`,
+      `${areaName} call girls`,
+      `${areaName} escorts`,
+      `escorts in ${areaName}`,
+      `call girls in ${areaName}`,
+      `call girl near ${areaName}`,
+      `call girls in ${product.city}`,
       `${product.city} escorts`,
-      `escorts in ${product.city}`,
       "Hyderabad call girls",
       "Hyderabad VIP escorts",
       "independent call girls Hyderabad",
       "genuine escort service Hyderabad",
       "cash on meeting escort Hyderabad",
+      "hotel outcall escorts Hyderabad",
     ],
     alternates: {
       canonical: canonicalUrl,
@@ -61,7 +73,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: product.image,
           width: 800,
           height: 1067,
-          alt: `${product.name} - Escort in ${product.city}`,
+          alt: `${product.name} - Escort in ${areaName} Hyderabad`,
         },
       ],
     },
@@ -71,6 +83,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       images: [product.image],
     },
+    other: {
+      "geo.region": product.geoRegion || "IN-TG",
+      "geo.placename": placename,
+      "geo.position": geoPos,
+      ICBM: icbm,
+      "geo.country": "IN",
+      "DC.title": title,
+      "DC.description": description,
+      "DC.coverage": "Hyderabad, Telangana, India",
+    },
     robots: {
       index: true,
       follow: true,
@@ -79,6 +101,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,
+        "max-video-preview": -1,
       },
     },
   };
@@ -93,51 +116,132 @@ export default async function ProductDetailPage({ params }: PageProps) {
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.calgirlriya.in";
+  const canonicalUrl = `${siteUrl}/product/${product.id}`;
+  const areaName = product.area || product.city.replace("Hyderabad / ", "");
+  const lat = product.latitude || 17.385;
+  const lng = product.longitude || 78.4867;
+  const postalCode = product.postalCode || "500034";
+  const title =
+    product.metaTitle || `${product.name} – Call Girl in ${areaName} Hyderabad | VIP Escorts`;
+  const description =
+    product.metaDescription ||
+    `Book ${product.name}, a verified ${product.age}-year-old VIP escort in ${areaName}, Hyderabad. Available 24/7 for luxury hotel & home outcalls with complete privacy guaranteed.`;
 
-  // Structured Data (JSON-LD) for Rich Results & Google SEO
+  // Structured Data (JSON-LD) with Rich Geo & LocalBusiness Schema for Top Google Indexing
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    name: product.name,
-    headline: product.title,
-    description: product.description,
-    image: `${siteUrl}${product.image}`,
-    url: `${siteUrl}/product/${product.id}`,
-    mainEntity: {
-      "@type": "Person",
-      name: product.name,
-      jobTitle: "VIP Companion / Escort Model",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: product.city.replace("Hyderabad / ", ""),
-        addressRegion: "Telangana",
-        addressCountry: "IN",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: title,
+        description: description,
+        inLanguage: "en-IN",
+        mainEntity: {
+          "@id": `${canonicalUrl}#person`,
+        },
       },
-      telephone: product.phone,
-    },
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${siteUrl}/`,
+      {
+        "@type": "Person",
+        "@id": `${canonicalUrl}#person`,
+        name: product.name,
+        jobTitle: "VIP Companion / Escort Model",
+        description: product.description,
+        image: `${siteUrl}${product.image}`,
+        url: canonicalUrl,
+        telephone: product.phone,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: areaName,
+          addressLocality: areaName,
+          addressRegion: "Telangana",
+          postalCode: postalCode,
+          addressCountry: "IN",
         },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Models",
-          item: `${siteUrl}/product`,
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: lat,
+          longitude: lng,
         },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: product.name,
-          item: `${siteUrl}/product/${product.id}`,
+        areaServed: [
+          areaName,
+          "Hyderabad",
+          "Telangana",
+        ],
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": `${canonicalUrl}#localbusiness`,
+        name: `${product.name} – Escort Service in ${areaName} Hyderabad`,
+        image: `${siteUrl}${product.image}`,
+        url: canonicalUrl,
+        telephone: product.phone,
+        priceRange: "₹₹₹",
+        currenciesAccepted: "INR",
+        paymentAccepted: "Cash, UPI, Online",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: areaName,
+          addressLocality: "Hyderabad",
+          addressRegion: "Telangana",
+          postalCode: postalCode,
+          addressCountry: "IN",
         },
-      ],
-    },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: lat,
+          longitude: lng,
+        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            ],
+            opens: "00:00",
+            closes: "23:59",
+          },
+        ],
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: product.rating.toString(),
+          reviewCount: "140",
+          bestRating: "5",
+          worstRating: "1",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${siteUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Models",
+            item: `${siteUrl}/product`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `${product.name} (${areaName})`,
+            item: canonicalUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (

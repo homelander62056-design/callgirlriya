@@ -93,7 +93,7 @@ export default function Page() {
               {/* Right Column Image Card */}
               <div className="lg:col-span-5 relative flex justify-center">
 
-                <div className="relative w-full max-w-md h-[400px] sm:h-[480px] rounded-3xl overflow-hidden border border-zinc-200 shadow-2xl shadow-blue-900/10 bg-gray-100 group">
+                <div className="relative w-full max-w-[280px] sm:max-w-md h-[300px] sm:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200 shadow-2xl shadow-blue-900/10 bg-gray-100 group">
                   <img
                     src="/images/homepart.png"
                     alt="Featured Hyderabad Companion"
@@ -180,7 +180,7 @@ export default function Page() {
         <section className="py-10 px-4 sm:px-8 max-w-6xl mx-auto space-y-5">
 
           {/* Card 1: Locations We Serve Header & Location Grid */}
-          <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-xs border border-zinc-200 text-center space-y-6">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-10 shadow-xs border border-zinc-200 text-center space-y-4 sm:space-y-6">
 
             {/* Header Block */}
             <div className="space-y-1.5 text-center">
@@ -190,13 +190,13 @@ export default function Page() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight">
                 Locations We <span className="text-[#ff2d55]">Serve</span>
               </h2>
-              <p className="text-sm sm:text-base text-zinc-500 max-w-xl mx-auto pt-0.5 font-medium">
+              <p className="text-xs sm:text-base text-zinc-500 max-w-xl mx-auto pt-0.5 font-medium">
                 Premium escort services across 30+ locations in Hyderabad
               </p>
             </div>
 
-            {/* Location Cards Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 max-w-5xl mx-auto">
+            {/* Location Cards Grid - 4 columns per row on mobile */}
+            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1.5 sm:gap-4 max-w-5xl mx-auto">
               {[
                 "Banjara Hills",
                 "Jubilee Hills",
@@ -227,12 +227,12 @@ export default function Page() {
                 <Link
                   key={cityName}
                   href={`/product?city=${encodeURIComponent(cityName)}`}
-                  className="bg-white border border-zinc-200/80 hover:border-rose-400 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-2xs hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer group text-center"
+                  className="bg-white border border-zinc-200/80 hover:border-rose-400 rounded-xl sm:rounded-2xl p-1.5 sm:p-4 flex flex-col items-center justify-center gap-1 sm:gap-2 shadow-2xs hover:shadow-md transition-all hover:-translate-y-0.5 cursor-pointer group text-center min-w-0"
                 >
-                  <svg className="w-5 h-5 text-rose-500 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-rose-500 fill-current group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                   </svg>
-                  <span className="text-xs sm:text-sm font-semibold text-zinc-800 group-hover:text-rose-500 transition-colors">
+                  <span className="text-[10px] sm:text-sm font-semibold text-zinc-800 group-hover:text-rose-500 transition-colors leading-tight truncate w-full">
                     {cityName}
                   </span>
                 </Link>
