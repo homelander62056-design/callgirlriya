@@ -3,14 +3,14 @@
 import React from "react";
 import Link from "next/link";
 import { initialProductsData } from "./productsData";
-import { trackWhatsAppClick, createWhatsAppLink } from "../utils/trackWhatsapp";
+import { trackWhatsAppClick, trackCallClick, createWhatsAppLink } from "../utils/trackWhatsapp";
 import WhatsAppIcon from "../components/WhatsAppIcon";
 import PhoneIcon from "../components/PhoneIcon";
 
 export default function ProductClient() {
   return (
     <div className="min-h-screen bg-[#0c0a09] font-sans text-zinc-100 selection:bg-rose-500 selection:text-white">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-8 sm:pb-12 space-y-5 sm:space-y-6">
 
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="text-xs sm:text-sm text-zinc-400 flex items-center gap-2 font-medium">
@@ -84,32 +84,47 @@ export default function ProductClient() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <a
-                      href={waLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="WhatsApp"
-                      onClick={() =>
-                        trackWhatsAppClick({
-                          name: item.name,
-                          city: item.city,
-                          whatsappNumber: item.whatsappNumber,
-                        })
-                      }
-                      className="bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
+                  <div className="flex items-center justify-between pt-2 border-t border-zinc-800/80 mt-auto">
+                    <Link
+                      href={`/product/${item.id}`}
+                      className="text-blue-500 hover:text-blue-400 font-bold text-xs sm:text-sm flex items-center gap-1 group/btn transition-colors"
                     >
-                      <WhatsAppIcon className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" size={18} />
-                      <span className="hidden sm:inline">WhatsApp</span>
-                    </a>
-                    <a
-                      href={`tel:${cleanPhone}`}
-                      aria-label="Call Now"
-                      className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 px-2.5 sm:px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
-                    >
-                      <PhoneIcon className="w-4 h-4 sm:w-4 sm:h-4 shrink-0" size={18} />
-                      <span className="hidden sm:inline">Call Now</span>
-                    </a>
+                      <span>View</span>
+                      <span className="group-hover/btn:translate-x-0.5 transition-transform">&rsaquo;</span>
+                    </Link>
+
+                    <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                      <a
+                        href={`tel:${cleanPhone}`}
+                        aria-label="Call Now"
+                        onClick={() =>
+                          trackCallClick({
+                            name: item.name,
+                            city: item.city,
+                            number: item.phone,
+                          })
+                        }
+                        className="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-[#ff2b54] hover:bg-[#e02447] text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all"
+                      >
+                        <PhoneIcon className="w-4.5 h-4.5 sm:w-5 sm:h-5 fill-current" size={20} />
+                      </a>
+                      <a
+                        href={waLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                        onClick={() =>
+                          trackWhatsAppClick({
+                            name: item.name,
+                            city: item.city,
+                            whatsappNumber: item.whatsappNumber,
+                          })
+                        }
+                        className="w-9.5 h-9.5 sm:w-10.5 sm:h-10.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all"
+                      >
+                        <WhatsAppIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-current" size={22} />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

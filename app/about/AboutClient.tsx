@@ -77,11 +77,11 @@ export default function AboutClient() {
   return (
     <div className="w-full font-sans text-zinc-100 selection:bg-rose-500 selection:text-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-10 pb-14 bg-gradient-to-b from-rose-950/25 via-zinc-900/40 to-[#0c0a09] border-b border-zinc-800/80">
+      <section className="relative overflow-hidden pt-3 sm:pt-5 pb-8 sm:pb-12 bg-gradient-to-b from-rose-950/25 via-zinc-900/40 to-[#0c0a09] border-b border-zinc-800/80">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(225,29,72,0.15),rgba(255,255,255,0))]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="text-xs sm:text-sm text-zinc-400 flex items-center gap-2 font-medium mb-6">
+          <nav aria-label="Breadcrumb" className="text-xs sm:text-sm text-zinc-400 flex items-center gap-2 font-medium mb-3 sm:mb-4">
             <Link href="/" className="hover:text-rose-400 transition-colors">
               Home
             </Link>
@@ -90,9 +90,6 @@ export default function AboutClient() {
           </nav>
 
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-semibold">
-              ✨ Hyderabad&apos;s #1 Elite VIP Escort Service
-            </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
               About <span className="bg-gradient-to-r from-rose-400 via-pink-300 to-amber-300 bg-clip-text text-transparent">Riya Escorts</span> Hyderabad
             </h1>

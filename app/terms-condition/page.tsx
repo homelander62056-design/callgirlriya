@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.calgirlriya.in";
+
 export const metadata: Metadata = {
   title: "Terms & Conditions - Riya Escorts Hyderabad",
   description:
     "Read the terms, conditions, booking policies, privacy rules, and disclaimer for Riya Escorts Hyderabad VIP companionship services.",
+  alternates: {
+    canonical: `${siteUrl}/terms-condition`,
+  },
+  openGraph: {
+    title: "Terms & Conditions - Riya Escorts Hyderabad",
+    description:
+      "Read the terms, conditions, booking policies, privacy rules, and disclaimer for Riya Escorts Hyderabad VIP companionship services.",
+    url: `${siteUrl}/terms-condition`,
+    type: "website",
+  },
 };
 
 export default function TermsConditionPage() {

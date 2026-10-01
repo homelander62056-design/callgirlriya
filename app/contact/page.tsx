@@ -2,21 +2,33 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import WhatsAppIcon from "../components/WhatsAppIcon";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.calgirlriya.in";
+
 export const metadata: Metadata = {
   title: "Contact Us - Call Girls Services in Hyderabad Escorts Available 24/7",
   description:
     "Get in touch with Hyderabad Escorts Agency for 24/7 VIP Escorts, Russian Call Girls, Independent and College Model Escorts in Hyderabad with 100% privacy and discretion.",
+  alternates: {
+    canonical: `${siteUrl}/contact`,
+  },
+  openGraph: {
+    title: "Contact Us - Call Girls Services in Hyderabad Escorts Available 24/7",
+    description:
+      "Get in touch with Hyderabad Escorts Agency for 24/7 VIP Escorts, Russian Call Girls, Independent and College Model Escorts in Hyderabad with 100% privacy and discretion.",
+    url: `${siteUrl}/contact`,
+    type: "website",
+  },
 };
 
 export default function ContactPage() {
   return (
     <div className="w-full font-sans">
       {/* Hero & Breadcrumb Section */}
-      <section className="relative overflow-hidden pt-12 pb-16 bg-gradient-to-b from-rose-950/20 via-zinc-900/40 to-[#0c0a09] border-b border-zinc-800/80">
+      <section className="relative overflow-hidden pt-3 sm:pt-5 pb-8 sm:pb-12 bg-gradient-to-b from-rose-950/20 via-zinc-900/40 to-[#0c0a09] border-b border-zinc-800/80">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(225,29,72,0.15),rgba(255,255,255,0))]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-xs font-medium text-zinc-400 mb-6">
+          <div className="flex items-center gap-2 text-xs font-medium text-zinc-400 mb-3 sm:mb-4">
             <Link
               href="/"
               className="hover:text-white transition-colors"

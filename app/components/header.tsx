@@ -53,32 +53,6 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Quick Action Contact Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="tel:+918294107610"
-              className="px-2.5 py-1 rounded bg-rose-600/20 text-rose-300 border border-rose-500/30 hover:bg-rose-600 hover:text-white transition-all text-xs font-semibold flex items-center gap-1"
-            >
-              <span>📞</span>
-              <span className="hidden xs:inline">Call 24/7</span>
-            </a>
-            <a
-              href="https://wa.me/918294107610"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackWhatsAppClick({
-                  name: "Header Inquiry",
-                  city: "Hyderabad",
-                  whatsappNumber: "+918294107610",
-                })
-              }
-              className="px-2.5 py-1 rounded bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/40 hover:bg-[#25D366] hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5"
-            >
-              <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" size={14} />
-              <span>WhatsApp</span>
-            </a>
-          </div>
         </div>
       </div>
 

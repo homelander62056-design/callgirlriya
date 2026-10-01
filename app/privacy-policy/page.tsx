@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.calgirlriya.in";
+
 export const metadata: Metadata = {
   title: "Privacy Policy - Riya Escorts Hyderabad | 100% Confidentiality Assured",
   description:
     "Learn about our strict privacy policy, 100% client discretion, data security, zero-retention policy, and confidentiality guarantee at Riya Escorts Hyderabad.",
+  alternates: {
+    canonical: `${siteUrl}/privacy-policy`,
+  },
+  openGraph: {
+    title: "Privacy Policy - Riya Escorts Hyderabad | 100% Confidentiality Assured",
+    description:
+      "Learn about our strict privacy policy, 100% client discretion, data security, zero-retention policy, and confidentiality guarantee at Riya Escorts Hyderabad.",
+    url: `${siteUrl}/privacy-policy`,
+    type: "website",
+  },
 };
 
 export default function PrivacyPolicyPage() {

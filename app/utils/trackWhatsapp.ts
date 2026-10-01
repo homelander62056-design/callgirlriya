@@ -1,5 +1,5 @@
 /**
- * WhatsApp tracking utilities for analytics, email notifications, and deep link generation.
+ * Click tracking utilities for WhatsApp and Phone Call analytics & instant Email notifications.
  */
 
 declare global {
@@ -12,18 +12,52 @@ export interface WhatsAppClickData {
   name?: string;
   city?: string;
   whatsappNumber?: string;
+  number?: string;
+  type?: "WhatsApp" | "Call";
   source?: string;
 }
 
 /**
- * Tracks a WhatsApp click event, fires analytics, and triggers email alert via /api/whatsapp-click
+ * Tracks a WhatsApp click event and sends an instant email notification
  */
 export function trackWhatsAppClick(data: WhatsAppClickData = {}): void {
+  sendTrackingEvent({
+    name: data.name || "VIP Model WhatsApp Inquiry",
+    city: data.city || "Hyderabad",
+    targetNumber: data.whatsappNumber || data.number || "+918294107610",
+    actionType: "WhatsApp",
+  });
+}
+
+/**
+ * Tracks a Direct Phone Call click event and sends an instant email notification
+ */
+export function trackCallClick(data: WhatsAppClickData = {}): void {
+  sendTrackingEvent({
+    name: data.name || "Direct Phone Call Inquiry",
+    city: data.city || "Hyderabad",
+    targetNumber: data.number || data.whatsappNumber || "+918294107610",
+    actionType: "Call",
+  });
+}
+
+function sendTrackingEvent({
+  name,
+  city,
+  targetNumber,
+  actionType,
+}: {
+  name: string;
+  city: string;
+  targetNumber: string;
+  actionType: "WhatsApp" | "Call";
+}) {
   try {
     const payload = {
-      name: data.name || "VIP Model Inquiry",
-      city: data.city || "Hyderabad",
-      whatsappNumber: data.whatsappNumber || "+918294107610",
+      name,
+      city,
+      actionType,
+      targetNumber,
       site: "calgirlriya",
       pageUrl: typeof window !== "undefined" ? window.location.href : "",
       timestamp: new Date().toISOString(),
@@ -31,10 +65,10 @@ export function trackWhatsAppClick(data: WhatsAppClickData = {}): void {
 
     // Google Analytics event if available
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "whatsapp_click", {
+      window.gtag("event", actionType === "WhatsApp" ? "whatsapp_click" : "call_click", {
         model_name: payload.name,
         model_city: payload.city,
-        whatsapp_number: payload.whatsappNumber,
+        target_number: payload.targetNumber,
       });
     }
 
@@ -56,7 +90,7 @@ export function trackWhatsAppClick(data: WhatsAppClickData = {}): void {
       }
     }
 
-    console.log("[Analytics & Email] WhatsApp click tracked:", payload);
+    console.log(`[Analytics & Email] ${actionType} click tracked:`, payload);
   } catch (error) {
     // Silently fail - tracking should never break the user experience
   }
